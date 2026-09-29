@@ -22,3 +22,6 @@ tmp/
 # Playwright
 test-results/
 playwright-report/
+
+# Generated software bill of materials
+sbom.cdx.json

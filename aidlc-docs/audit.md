@@ -150,3 +150,19 @@ what do you mean by user story?"
 **Context**: Outside the AI-DLC stages; Security Baseline pass still pending
 
 ---
+
+## CONSTRUCTION - Build and Test (Approval) and Security Baseline Pass
+**Timestamp**: 2026-09-29T10:26:45Z
+**User Input**: "continue"
+**AI Response**: "Build and Test approved. Enabled the Security Baseline extension and loaded security-baseline.md. Evidence: npm audit 0 vulnerabilities; no unsafe DOM/code sinks; no external URLs; no secrets. Findings fixed: F-1 SECURITY-04 missing CSP (added meta CSP + referrer policy, E2E test for violations and blocking of inline scripts); F-2 SECURITY-15 missing global error handler (added error/unhandledrejection handlers); F-3 SECURITY-10 audit/SBOM not documented (added npm scripts + build instructions); F-4 SECURITY-11 no misuse cases (added to functional design); F-5 SECURITY-09 misleading 'read-only' debug-handle comment (corrected, exception documented). Added opt-in ALL_BROWSERS Playwright projects; 39/39 E2E pass on Chromium, Firefox, WebKit over file://. npm test: 62/62 + 13/13. Documented exceptions: HTTP-header-only controls (HSTS, nosniff, XFO) need a host; debug handle kept. No blocking security findings. Changes not yet committed/pushed - awaiting user decision."
+**Context**: Security Baseline pass complete - awaiting approval
+
+---
+
+## Security Baseline Pass (Approval) - Push
+**Timestamp**: 2026-09-29T12:00:44Z
+**User Input**: "push"
+**AI Response**: "Security Baseline pass taken as approved. Rescanned the changes for secrets and personal data, committed, and pushed main to stedima88/flappy-kiro. Marked the workflow complete (Operations is a placeholder)."
+**Context**: Security Baseline pass approved; workflow complete
+
+---

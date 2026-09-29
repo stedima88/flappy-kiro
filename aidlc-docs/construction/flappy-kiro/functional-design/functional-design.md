@@ -78,3 +78,13 @@ Anything else does nothing.
 | game (state machine) | Random command sequences, compared after every step against a simplified transition-table model: the state always matches the model, the score never decreases within a run, and the high score is at least the final score | Stateful |
 
 Components with no PBT properties: renderer, audio and input (browser I/O adapters, covered by E2E and manual play), and strings (static data).
+
+## 6. Misuse Cases (SECURITY-11)
+
+| Misuse | Effect | Handling |
+|---|---|---|
+| Player edits `localStorage` (e.g. sets `flappyKiro.highScore` to `99999` or `<script>`) | Only their own browser is affected. Nothing leaves the device. | Values are parsed against an allowlist: digits only / `muted` boolean / `motion` in `full`,`reduced`. Anything else falls back to the default (FR-5.3). Text is always shown with `textContent`, never parsed as HTML. |
+| Player changes game state through DevTools or `window.FlappyKiro.app` | They can cheat in their own single-player game. | Accepted. There's no leaderboard, account or server, so there's no trust boundary. Revisit if an online leaderboard is ever added: scores would then have to be validated on the server. |
+| Key or tap spam (auto-repeat, flooding events) | Could make flaps faster than intended | Key auto-repeat is ignored (FR-2.2). Each event does constant work, and the simulation runs per frame with dt capped. |
+| A hostile page frames the game | Clickjacking risk if the game is ever hosted | No server exists today. If hosted, the host must send `X-Frame-Options: DENY` / `frame-ancestors 'none'` (see the Security Baseline review). |
+| A tampered or corrupted asset file | The sprite or sound fails to load | Falls back to the drawn shape / silence (NFR-6.1, NFR-6.2). The CSP only allows files from the game's own folder. |

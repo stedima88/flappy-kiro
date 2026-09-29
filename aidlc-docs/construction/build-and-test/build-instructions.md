@@ -37,3 +37,11 @@ open index.html                   # macOS; or double-click index.html
 ### High score is lost after a reload when opening from disk
 - **Cause**: known limitation L-2 (some browsers, especially Safari, restrict localStorage on `file://`).
 - **Solution**: serve the folder over HTTP (step 2, second option).
+
+## Supply Chain Checks (SECURITY-10)
+```bash
+npm ci            # install exactly what package-lock.json pins (integrity hashes checked)
+npm run audit     # dependency vulnerability scan; expected: "found 0 vulnerabilities"
+npm run sbom      # writes sbom.cdx.json (CycloneDX); git-ignored, generate it when releasing
+```
+The game has **zero runtime dependencies**. `fast-check` and `@playwright/test` are dev/test tools only and are never shipped to players.

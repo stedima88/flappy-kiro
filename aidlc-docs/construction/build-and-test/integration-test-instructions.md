@@ -18,6 +18,7 @@ Flappy Kiro is a single unit with no services. Integration here means that the m
 | 10 | Settings menu works with the keyboard only; Space doesn't flap in the menu | FR-12.5 |
 | 11 | Settings opened from pause return to pause | FR-12.1 |
 | 12 | Touch device: a tap starts the game; the stage fits a 390 px wide screen at 4:3 | FR-2.1, FR-11.2 |
+| 13 | CSP is active, nothing violates it, and inline scripts are blocked | SECURITY-04 |
 
 ## Setup
 No services to start. Only the Chromium build is needed: `npx playwright install chromium`.
@@ -26,7 +27,8 @@ No services to start. Only the Chromium build is needed: `npx playwright install
 ```bash
 npm run test:e2e
 ```
-- **Expected**: `12 passed`.
+- **Expected**: `13 passed` (Chromium).
+- **All engines**: `npx playwright install firefox webkit` once, then `ALL_BROWSERS=1 npm run test:e2e`. Expected: `39 passed` (Chromium, Firefox, WebKit).
 - **On failure**: screenshots, traces and `error-context.md` files are written to `test-results/`.
 - **Cleanup**: none required (git-ignored output). Each test gets a fresh browser context, so localStorage doesn't leak between tests.
 

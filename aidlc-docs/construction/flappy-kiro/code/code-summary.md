@@ -25,5 +25,5 @@
 ## Deviations and notes
 - Difficulty limits were lowered from the first draft (max speed 300 to 270, max gap delta 180 to 150) after an autopilot simulation showed the hardest level was very tight. functional-design.md is updated.
 - Two small additions beyond the requirements, for touch-only players: an on-screen pause button (❚❚), and Esc on Game Over returning to the Start screen.
-- `window.FlappyKiro.app` is a read-only debugging handle. The E2E tests use it to set a score in the high-score test.
+- `window.FlappyKiro.app` is a debugging handle that can change the game state. The E2E tests use it to set a score in the high-score test. This is acceptable because the game is single-player and local (see the Security Baseline review).
 - Not covered by automated tests (manual play): the sprite fallback when `ghosty.png` fails to load, and audio actually coming out of the speakers.

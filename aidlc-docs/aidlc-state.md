@@ -4,7 +4,7 @@
 - **Project Name**: Flappy Kiro
 - **Project Type**: Greenfield
 - **Start Date**: 2026-09-29T08:41:14Z
-- **Current Stage**: CONSTRUCTION - Build and Test complete - awaiting approval (next: Security Baseline pass)
+- **Current Stage**: COMPLETE - all stages done; OPERATIONS is a placeholder
 
 ## Workspace State
 - **Version Control**: Git initialized 2026-09-29 (local, branch main, pushed to GitHub 2026-09-29)
@@ -21,7 +21,7 @@
 ## Extension Configuration
 | Extension | Enabled | Decided At |
 |---|---|---|
-| Security Baseline | No (deferred - dedicated Security Baseline pass at end of workflow, after Build and Test) | Requirements Analysis |
+| Security Baseline | Yes (enabled 2026-09-29 for the deferred pass after Build and Test) | Requirements Analysis / Security pass |
 | Resiliency Baseline | Yes (local-only scope; infra rules N/A) | Requirements Analysis |
 | Property-Based Testing | Yes (full enforcement) | Requirements Analysis |
 
@@ -42,4 +42,4 @@
 - [ ] Infrastructure Design (SKIPPED - local only)
 - [x] Code Generation - flappy-kiro (approved 2026-09-29)
 - [x] Build and Test (instructions in construction/build-and-test/)
-- [ ] Security Baseline pass (deferred, after Build and Test)
+- [x] Security Baseline pass (construction/security/security-baseline-review.md, approved 2026-09-29)

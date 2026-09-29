@@ -7,7 +7,9 @@
   "scripts": {
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "node --test \"tests/unit/*.test.js\" \"tests/pbt/*.pbt.test.js\"",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "audit": "npm audit",
+    "sbom": "npm sbom --sbom-format cyclonedx > sbom.cdx.json"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",

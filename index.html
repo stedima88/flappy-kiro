@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#1b2733">
+  <!-- SECURITY-04: only local files may load; no inline scripts or styles, no plugins, no framing targets.
+       HSTS, X-Content-Type-Options and X-Frame-Options must be sent as HTTP headers by a host, if one is ever used. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Flappy Kiro</title>
   <link rel="icon" href="assets/ghosty.png">
   <link rel="stylesheet" href="styles.css">

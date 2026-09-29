@@ -6,6 +6,14 @@
   const { STATES, EVENTS } = G;
   const doc = root.document;
 
+  // SECURITY-15: last-resort handlers. Details go to the console only; players only ever
+  // see the generic error overlay (SECURITY-09).
+  root.addEventListener('error', (e) => console.error('Flappy Kiro unhandled error:', e.error || e.message));
+  root.addEventListener('unhandledrejection', (e) => {
+    console.error('Flappy Kiro unhandled promise rejection:', e.reason);
+    e.preventDefault();
+  });
+
   const $ = (id) => doc.getElementById(id);
   const stage = $('stage');
   const canvas = $('game-canvas');
@@ -235,6 +243,7 @@
   syncUi();
   root.requestAnimationFrame(frame);
 
-  // Read-only handle for debugging and E2E tests.
+  // Debugging handle used by the E2E tests. It can change the game state, which is acceptable:
+  // this is a single-player local game, so there is no trust boundary to protect.
   FK.app = { game, settings };
 })(window);

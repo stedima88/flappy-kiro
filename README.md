@@ -43,6 +43,8 @@ npm install
 npx playwright install chromium   # once
 npm test                          # unit + property-based + E2E
 npm run test:unit                 # unit + property-based only
+ALL_BROWSERS=1 npm run test:e2e   # E2E on Chromium, Firefox and WebKit (npx playwright install firefox webkit first)
+npm run audit                     # dependency vulnerability scan
 ```
 
 Property-based tests print their seed. To replay a failure, run `FC_SEED=<seed> npm run test:unit`.

@@ -161,3 +161,24 @@ test.describe('touch devices', () => {
     expect(Math.abs(box.width / box.height - 800 / 600)).toBeLessThan(0.01);
   });
 });
+
+test('the Content Security Policy is active and nothing violates it (SECURITY-04)', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__cspViolations = [];
+    document.addEventListener('securitypolicyviolation', (e) => window.__cspViolations.push(`${e.violatedDirective} ${e.blockedURI}`));
+  });
+  const errors = await open(page);
+  await page.keyboard.press('Space'); // sprite, sounds and styles all load during play
+  await page.waitForTimeout(500);
+  expect(await page.evaluate(() => window.__cspViolations)).toEqual([]);
+  expect(errors).toEqual([]);
+  // the policy really blocks things: an inline script is refused
+  const inlineRan = await page.evaluate(() => {
+    window.__inline = false;
+    const s = document.createElement('script');
+    s.textContent = 'window.__inline = true';
+    document.body.appendChild(s);
+    return window.__inline;
+  });
+  expect(inlineRan).toBe(false);
+});
