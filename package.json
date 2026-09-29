@@ -1,0 +1,16 @@
+{
+  "name": "flappy-kiro",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Flappy Kiro - a Flappy Bird style browser game starring Ghosty. No build step: open index.html.",
+  "license": "SEE LICENSE IN LICENCE.md",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "node --test \"tests/unit/*.test.js\" \"tests/pbt/*.pbt.test.js\"",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "fast-check": "^4.3.0"
+  }
+}

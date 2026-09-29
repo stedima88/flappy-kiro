@@ -1,0 +1,176 @@
+/* Flappy Kiro layout: an 800x600 logical stage scaled to fit the window (FR-11). */
+:root {
+  --letterbox: #1b2733;
+  --panel: rgba(255, 255, 255, 0.9);
+  --ink: #1f3b4d;
+  --green: #39a33a;
+  --green-dark: #1f6e24;
+  --danger: #c0392b;
+  --focus: #ffd54f;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--letterbox);
+  overscroll-behavior: none;
+}
+
+#stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 800px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  overflow: hidden;
+  /* Mobile: no zoom, scroll, selection or long-press menu from taps (FR-11.5). */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+#game-canvas {
+  display: block;
+  width: 800px;
+  height: 600px;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 50px; /* keep the score bar visible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay[hidden],
+.menu[hidden],
+[hidden] {
+  display: none !important;
+}
+
+.panel {
+  min-width: 320px;
+  max-width: 560px;
+  padding: 20px 28px;
+  border-radius: 18px;
+  background: var(--panel);
+  color: var(--ink);
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 44px;
+  color: var(--green-dark);
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 32px;
+}
+
+.prompt {
+  margin: 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stat {
+  margin: 6px 0;
+  font-size: 18px;
+}
+
+.stat.big {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.badge {
+  display: inline-block;
+  margin: 4px 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #ffe082;
+  font-weight: 700;
+}
+
+.controls {
+  margin: 10px 0;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+button {
+  font: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border: 2px solid var(--green-dark);
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+button.danger {
+  background: var(--danger);
+  border-color: #8e2a20;
+}
+
+.hud {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.icon-button {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: 20px;
+  background: rgba(31, 59, 77, 0.55);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

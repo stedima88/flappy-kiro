@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1b2733">
+  <title>Flappy Kiro</title>
+  <link rel="icon" href="assets/ghosty.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="stage" data-testid="game-stage" data-state="START">
+    <canvas id="game-canvas" data-testid="game-canvas" aria-label="Flappy Kiro game area" role="img"></canvas>
+
+    <div class="hud">
+      <button id="hud-pause" type="button" class="icon-button" data-testid="hud-pause-button" hidden>❚❚</button>
+      <button id="hud-mute" type="button" class="icon-button" data-testid="hud-mute-button">🔊</button>
+    </div>
+
+    <section id="screen-start" class="overlay" data-testid="start-screen">
+      <div class="panel">
+        <h1 data-text="title"></h1>
+        <p class="prompt" data-text="startPrompt"></p>
+        <p id="start-high" class="stat" data-testid="start-screen-high-score"></p>
+        <p class="controls" data-text="controls"></p>
+        <button id="start-settings" type="button" data-testid="start-screen-settings-button" data-text="settings"></button>
+      </div>
+    </section>
+
+    <section id="screen-pause" class="overlay" data-testid="pause-screen" hidden>
+      <div class="panel">
+        <h2 data-text="paused"></h2>
+        <p class="prompt" data-text="resumePrompt"></p>
+        <div class="row">
+          <button id="pause-resume" type="button" data-testid="pause-screen-resume-button" data-text="resume"></button>
+          <button id="pause-settings" type="button" data-testid="pause-screen-settings-button" data-text="settings"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-gameover" class="overlay" data-testid="gameover-screen" hidden>
+      <div class="panel">
+        <h2 data-text="gameOver"></h2>
+        <p id="gameover-score" class="stat big" data-testid="gameover-screen-score"></p>
+        <p id="gameover-high" class="stat" data-testid="gameover-screen-high-score"></p>
+        <p id="gameover-new-high" class="badge" data-testid="gameover-screen-new-high" data-text="newHighScore" hidden></p>
+        <p class="prompt" data-text="restartPrompt"></p>
+        <p class="controls" data-text="backToStart"></p>
+      </div>
+    </section>
+
+    <section id="screen-settings" class="overlay" data-testid="settings-menu" hidden>
+      <div class="panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <h2 id="settings-title" data-text="settings"></h2>
+        <div id="settings-main" class="menu">
+          <button id="settings-sound" type="button" data-testid="settings-menu-sound-toggle"></button>
+          <button id="settings-motion" type="button" data-testid="settings-menu-motion-toggle"></button>
+          <button id="settings-reset" type="button" class="danger" data-testid="settings-menu-reset-button" data-text="resetHighScore"></button>
+          <button id="settings-close" type="button" data-testid="settings-menu-close-button" data-text="close"></button>
+        </div>
+        <div id="settings-confirm" class="menu" hidden>
+          <p class="prompt" data-text="resetConfirm"></p>
+          <button id="settings-reset-yes" type="button" class="danger" data-testid="settings-menu-reset-confirm-button" data-text="yes"></button>
+          <button id="settings-reset-no" type="button" data-testid="settings-menu-reset-cancel-button" data-text="no"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-error" class="overlay" data-testid="error-screen" role="alert" hidden>
+      <div class="panel"><p data-text="error"></p></div>
+    </section>
+  </main>
+
+  <!-- Classic scripts in dependency order: no modules, so index.html also works from file:// -->
+  <script src="src/config.js"></script>
+  <script src="src/strings.js"></script>
+  <script src="src/rng.js"></script>
+  <script src="src/physics.js"></script>
+  <script src="src/difficulty.js"></script>
+  <script src="src/walls.js"></script>
+  <script src="src/collision.js"></script>
+  <script src="src/scoring.js"></script>
+  <script src="src/storage.js"></script>
+  <script src="src/game.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/input.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>
