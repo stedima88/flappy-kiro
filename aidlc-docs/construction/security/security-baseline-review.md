@@ -38,14 +38,14 @@
 | SECURITY-07 Network configuration | N/A | No network resources. |
 | SECURITY-08 Application access control | N/A | No endpoints, users or protected resources. |
 | SECURITY-09 Hardening | Compliant | No default credentials. Players see a generic error message; details go to the console only. No sample pages. Current runtimes (Node 24, Playwright 1.63, fast-check 4). **Documented exception**: the debug handle `window.FlappyKiro.app` stays, because it's needed by the E2E tests and the game has no trust boundary. |
-| SECURITY-10 Supply chain | Compliant | `package-lock.json` is committed with integrity hashes. The audit script finds 0 vulnerabilities. There are no unused dependencies. Only the official npm registry is used. An SBOM script is available. There are zero runtime dependencies. The CI part is N/A (no pipeline). |
+| SECURITY-10 Supply chain | Compliant | `package-lock.json` is committed with integrity hashes. The audit script finds 0 vulnerabilities. There are no unused dependencies. Only the official npm registry is used. An SBOM script is available. There are zero runtime dependencies. CI (`.github/workflows/ci.yml`) pins actions by commit SHA and Node to 24.15.0, runs `npm ci` and `npm audit --audit-level=moderate`, and uses a read-only token. |
 | SECURITY-11 Secure design | Compliant | No security-critical logic to isolate. Rate limiting is N/A (no public endpoints). Misuse cases are documented (F-4). |
 | SECURITY-12 Authentication | N/A | No authentication. No hardcoded credentials (verified). |
-| SECURITY-13 Integrity | Compliant | Deserialization is safe (allowlisted `JSON.parse`). No CDN scripts, so SRI isn't needed. npm checks lockfile integrity hashes. CI and critical-data auditing are N/A. |
+| SECURITY-13 Integrity | Compliant | Deserialization is safe (allowlisted `JSON.parse`). No CDN scripts, so SRI isn't needed. npm checks lockfile integrity hashes. Only the repository owner can change the CI definition, and every change is tracked in Git history. Critical-data auditing is N/A. |
 | SECURITY-14 Alerting and monitoring | N/A | No deployed service or security events. |
 | SECURITY-15 Exception handling | Compliant | Storage calls, audio playback (including promise rejections) and image loading are all handled. The game loop has a guard and there are now global handlers. Players see generic messages. Fail-closed is N/A (no access control). |
 
 ## If the Game Is Ever Hosted (follow-ups)
 1. Serve over HTTPS with HSTS, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY` / `frame-ancestors 'none'`, and move the CSP into a header.
 2. Revisit the Resiliency decisions recorded as N/A (hosting, rollback, monitoring).
-3. Add `npm ci && npm run audit && npm test` to a CI pipeline (also completes PBT-08's CI requirement).
+3. ~~Add CI~~ Done 2026-09-29: `.github/workflows/ci.yml`.

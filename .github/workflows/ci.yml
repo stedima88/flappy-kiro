@@ -1,0 +1,59 @@
+# Flappy Kiro CI: supply-chain checks, unit + property-based tests, E2E on three browser engines.
+# Actions are pinned to commit SHAs and Node to an exact version (SECURITY-10).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Least privilege: the workflow only needs to read the repository (SECURITY-06).
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.15.0
+          cache: npm
+
+      - name: Install exactly what the lockfile pins
+        run: npm ci
+
+      - name: Dependency vulnerability scan (SECURITY-10)
+        run: npm audit --audit-level=moderate
+
+      - name: Unit and property-based tests (PBT-08 seeds are printed in the log)
+        run: npm run test:unit
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: E2E tests on Chromium, Firefox and WebKit
+        run: npm run test:e2e
+        env:
+          ALL_BROWSERS: '1'
+
+      - name: Upload Playwright results on failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: playwright-results
+          path: test-results/
+          retention-days: 14

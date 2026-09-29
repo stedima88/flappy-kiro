@@ -25,7 +25,7 @@
 | Extension | Status |
 |---|---|
 | Resiliency Baseline | RESILIENCY-01 compliant (Low criticality). RESILIENCY-10 compliant: client-side degradation, with storage and audio fallbacks tested automatically and the sprite fallback checked manually. RESILIENCY-14: resiliency testing is the automated fallback tests plus the manual checks in integration-test-instructions.md. All others N/A (local only, no hosting). |
-| Property-Based Testing | PBT-08 compliant: shrinking enabled, a seed logged on every run, and replay with `FC_SEED`. The CI part is N/A because there's no CI pipeline (local only); add `npm test` to CI if one is created. All other PBT rules compliant. |
+| Property-Based Testing | PBT-08 compliant: shrinking enabled, a seed logged on every run, replay with `FC_SEED`, and property tests run in CI (`.github/workflows/ci.yml`) with no retries. All other PBT rules compliant. |
 | Security Baseline | Enabled for the final pass: compliant or N/A on all 15 rules, no blocking findings (security-baseline-review.md). |
 
 ## Overall Status

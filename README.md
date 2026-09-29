@@ -1,5 +1,7 @@
 # Flappy Kiro
 
+[![CI](https://github.com/stedima88/flappy-kiro/actions/workflows/ci.yml/badge.svg)](https://github.com/stedima88/flappy-kiro/actions/workflows/ci.yml)
+
 An arcade game in the style of Flappy Bird. Guide **Ghosty** through the gaps between pairs of walls. Every pair you pass scores a point. Touching a wall or the ground ends the game.
 
 ![Flappy Kiro UI](img/example-ui.png)
@@ -46,6 +48,8 @@ npm run test:unit                 # unit + property-based only
 ALL_BROWSERS=1 npm run test:e2e   # E2E on Chromium, Firefox and WebKit (npx playwright install firefox webkit first)
 npm run audit                     # dependency vulnerability scan
 ```
+
+CI (`.github/workflows/ci.yml`) runs `npm ci`, `npm audit`, the unit and property-based tests, and the E2E tests on all three engines for every push and pull request to `main`.
 
 Property-based tests print their seed. To replay a failure, run `FC_SEED=<seed> npm run test:unit`.
 

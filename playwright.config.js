@@ -17,5 +17,7 @@ module.exports = defineConfig({
   timeout: 30000,
   fullyParallel: true,
   reporter: 'list',
+  forbidOnly: !!process.env.CI, // a stray test.only must not silently skip the suite in CI
+  retries: 0, // flaky failures are investigated, not retried away (PBT-08)
   projects,
 });
