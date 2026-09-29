@@ -110,6 +110,17 @@ test('restart waits for the cooldown and resets the run (FR-7.4, FR-7.5)', () =>
   assert.equal(g.highScore, 4);
 });
 
+test('the restart cooldown counts real time even when frames are slow (FR-7.4)', () => {
+  const g = newGame();
+  G.dispatch(g, E.FLAP);
+  g.ghosty = { ...g.ghosty, y: cfg.playHeight };
+  G.update(g, 1 / 60);
+  assert.equal(g.state, S.GAME_OVER);
+  for (let i = 0; i < 6; i++) G.update(g, 0.1); // 10 FPS for 0.6 s: each frame is capped for physics
+  G.dispatch(g, E.FLAP);
+  assert.equal(g.state, S.PLAYING);
+});
+
 test('Esc on game over returns to the start screen and clears the run', () => {
   const g = newGame();
   G.dispatch(g, E.FLAP);

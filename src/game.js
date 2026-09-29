@@ -131,7 +131,9 @@
     const cfg = game.cfg;
     const dt = physics.clampDt(rawDt, cfg.maxFrameDt);
     game.time += dt;
-    game.stateTime += dt;
+    // Screen timers (the restart cooldown) use real elapsed time, so a slow device doesn't
+    // stretch them. Only the simulation uses the capped dt.
+    game.stateTime += Number.isFinite(rawDt) && rawDt > 0 ? rawDt : 0;
     if (game.state !== STATES.PLAYING) return effects;
 
     game.ghosty = physics.step(game.ghosty, dt, cfg);

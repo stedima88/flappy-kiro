@@ -176,3 +176,11 @@ Then guide me through User Stories decisions"
 **Context**: Post-workflow operations; User Stories stage re-opened at the user's request (Part 1 Planning)
 
 ---
+
+## Post-Workflow - CI first run fix
+**Timestamp**: 2026-09-29T12:11:24Z
+**User Input**: "N/A"
+**AI Response**: "First CI run: 38/39 E2E passed; WebKit restart test failed because the Game Over cooldown was counted in capped game time (1/30 s per frame), so on a slow runner 600 ms real time was about 0.2 s game time. Real defect (restart delay stretched on laggy devices). Fixed game.update: screen timers use real elapsed time, simulation keeps capped dt. Added a regression unit test (10 FPS scenario). Local: 63/63 unit+PBT, 39/39 E2E. Pushed and re-ran CI."
+**Context**: CI stabilisation
+
+---
